@@ -1,0 +1,63 @@
+### 📩 Регистрация пользователя
+POST http://127.0.0.1:8000/api/auth/register/
+Content-Type: application/json
+
+{
+  "email": "ersaiynabdulla2005@gmail.com",
+  "username": "yersaiyn_abdulla",
+  "password": "1112"
+}
+
+
+### 🔐 Получить токен (логин)
+POST http://127.0.0.1:8000/api/auth/token/
+Content-Type: application/json
+
+{
+  "email": "ersaiynabdulla2005@gmail.com",
+  "password": "1112"
+}
+
+
+### 🧪 Получить список всех подписок
+GET http://127.0.0.1:8000/api/plans/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0OTk4NDY1LCJpYXQiOjE3NDQ5OTgxNjUsImp0aSI6IjU2M2UzYjJjZTE5ODRhNzU4MjJhMjhlNzgxMDM3NTNhIiwidXNlcl9pZCI6ImEwMTViMmU3LWQ1N2YtNDBmYy05Nzk3LWRiYTM3MjdkZjViMiJ9.BhounwgYl3Ri_Geu-lfWEvO-tvuw2-cGjDRWvQQxzUg
+
+
+### ➕ Создать новый Subscription Plan (только если ты админ)
+POST http://127.0.0.1:8000/api/plans/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0OTk4NDY1LCJpYXQiOjE3NDQ5OTgxNjUsImp0aSI6IjU2M2UzYjJjZTE5ODRhNzU4MjJhMjhlNzgxMDM3NTNhIiwidXNlcl9pZCI6ImEwMTViMmU3LWQ1N2YtNDBmYy05Nzk3LWRiYTM3MjdkZjViMiJ9.BhounwgYl3Ri_Geu-lfWEvO-tvuw2-cGjDRWvQQxzUg
+Content-Type: application/json
+
+{
+  "name": "Premium Plan",
+  "price": 9.99,
+  "duration": 30,
+  "description": "Полный доступ на месяц",
+  "is_active": true
+}
+
+
+### 👤 Создать подписку пользователя
+POST http://127.0.0.1:8000/api/user-subscriptions/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0OTk4NDY1LCJpYXQiOjE3NDQ5OTgxNjUsImp0aSI6IjU2M2UzYjJjZTE5ODRhNzU4MjJhMjhlNzgxMDM3NTNhIiwidXNlcl9pZCI6ImEwMTViMmU3LWQ1N2YtNDBmYy05Nzk3LWRiYTM3MjdkZjViMiJ9.BhounwgYl3Ri_Geu-lfWEvO-tvuw2-cGjDRWvQQxzUg
+Content-Type: application/json
+
+{
+  "user": "<id_пользователя>",
+  "subscription": "<id_плана>",
+  "end_date": "2025-06-01T00:00:00Z",
+  "is_active": true,
+  "auto_renew": true
+}
+
+
+### 📩 Отправить уведомление пользователю
+POST http://127.0.0.1:8000/api/notifications/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ0OTk4NDY1LCJpYXQiOjE3NDQ5OTgxNjUsImp0aSI6IjU2M2UzYjJjZTE5ODRhNzU4MjJhMjhlNzgxMDM3NTNhIiwidXNlcl9pZCI6ImEwMTViMmU3LWQ1N2YtNDBmYy05Nzk3LWRiYTM3MjdkZjViMiJ9.BhounwgYl3Ri_Geu-lfWEvO-tvuw2-cGjDRWvQQxzUg
+Content-Type: application/json
+
+{
+  "user": "<id_пользователя>",
+  "message": "Ваша подписка успешно активирована!"
+}

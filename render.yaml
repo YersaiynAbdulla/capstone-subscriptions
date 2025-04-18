@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: capstone-subscriptions
+    env: docker
+    plan: free
+    autoDeploy: true
+    buildCommand: |
+      python manage.py migrate
+      python manage.py collectstatic --noinput
+      echo "from django.contrib.auth import get_user_model; \
+      User = get_user_model(); \
+      User.objects.filter(email='ersaiynabdulla2005@gmail.com').exists() or \
+      User.objects.create_superuser('yersaiyn_abdulla', 'ersaiynabdulla2005@gmail.com', '1112')" \
+      | python manage.py shell
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: False
+      - key: DATABASE_URL
+        fromDatabase:
+          name: capstone-db
+          property: connectionString
+
+databases:
+  - name: capstone-db
+    databaseName: subscriptions
+    user: outpeer_user
